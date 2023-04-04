@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import './Product.css'
 
 const Product = (props) => {
     //console.log(props)
@@ -10,15 +9,15 @@ const Product = (props) => {
     const handleAddToCart = props.handleAddToCart;
 
     return (
-        <div className='product'>
-            <img src={img} alt="" />
-            <div className='product-info'>
-                <h6 className='product-name'>{name}</h6>
-                <p>price: ${price}</p>
-                <p>Manufacturer: {seller}</p>
-                <p>Ratings: {ratings} stars</p>
+        <div className='shadow-lg rounded-xl flex flex-col'>
+            <img className='rounded-xl' src={img} alt="" />
+            <div className='p-5'>
+                <h6 className='text-xl font-semibold'>{name}</h6>
+                <p className='font-semibold mt-1 text-red-600'>price: ${price}</p>
+                <p className='font-semibold mt-1'>Manufacturer: {seller}</p>
+                <p className='font-semibold mt-1 text-yellow-500'>Ratings: {ratings} stars</p>
             </div>
-            <button onClick={() => handleAddToCart(props.product)} className='btn-cart'>Add to cart <FontAwesomeIcon icon={faShoppingCart} /></button>
+            <button onClick={() => handleAddToCart(props.product)} className=' bg-yellow-600 leading-normal w-full mt-auto text-lg font-semibold py-2 rounded-b-lg active:scale-50 duration-1000'>Add to cart <FontAwesomeIcon icon={faShoppingCart} /></button>
         </div>
     );
 };

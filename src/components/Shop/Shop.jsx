@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { addToDb, getShoppingCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
-import './Shop.css'
 const Shop = () => {
     //for fetch data
     const [products, setProduct] = useState([]);
@@ -10,20 +9,20 @@ const Shop = () => {
     //put data to cart
     const [cart, setCart] = useState([]);
     //core data
-    useEffect(()=>{
+    useEffect(() => {
         fetch('https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json')
-        .then(res => res.json())
-        .then(data => setProduct(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setProduct(data))
+    }, [])
     // local storage
-    useEffect(()=>{
+    useEffect(() => {
         //console.log('products',products);
         const storedCart = getShoppingCart();
-        
+
         const savedCart = [];
         //console.log(storedCart);
         // step 1 get id
-        for(const id in storedCart){
+        for (const id in storedCart) {
             //console.log(id);
             // step 2 get the product by using id
             const addedProduct = products.find(product => product.id === id);
@@ -44,9 +43,9 @@ const Shop = () => {
 
 
 
-    
+
     // get data to cart from product
-    const handleAddToCart = (product) =>{
+    const handleAddToCart = (product) => {
         // every time new cart
         const newCart = [...cart, product];
         setCart(newCart);
@@ -55,19 +54,19 @@ const Shop = () => {
     }
 
     return (
-        <div className='shop-container'>
-            <div className="product-container">
+        <div className='flex mt-10 px-10'>
+            <div className="grid grid-cols-3 gap-8 ">
                 {
-                    products.map(product => <Product 
-                    key={product.id}
-                    product = {product}
-                    // push to cart
-                    handleAddToCart = {handleAddToCart}
+                    products.map(product => <Product
+                        key={product.id}
+                        product={product}
+                        // push to cart
+                        handleAddToCart={handleAddToCart}
                     ></Product>)
                 }
-                
+
             </div>
-            <div className="cart-container">
+            <div className="w-2/4 ml-8 ">
                 <Cart cart={cart}></Cart>
             </div>
         </div>
